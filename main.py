@@ -25,22 +25,40 @@ while is_start:
     match str(choice_user):
         case '1':
             show_collection(collection)
+            waite = input("Нажмите ENTER для продолжения")
 
         case '2':
-            add_task = input("Введите имя задачи для добавления")
-            collection.append(add_task)
+            task_name = input("Введите имя задачи для добавления")
+            if task_name.startswith(' '):
+                if len(task_name) < 2 :
+                    print("название не может быть пустым")
+                    continue
+                else:
+                    print("название не может быть пустым")
+            else:
+                collection.append(f"задача {len(collection)} ")
 
         case '3':
             show_collection(collection)
-            select_task = int(input("Введите номер задачи"))
-            edit_task = input("Введите новое имя задачи для редактирования")
-            collection[select_task - 1] = edit_task
+            select_edit = input("Введите номер задачи")
+            if int(select_edit.isdigit()):
+                if (int(select_edit) > 0  and int(select_edit) <= len(collection)):
+                    edit_name = input("новое имя задачи")
+                    collection[int(select_edit) - 1] = edit_name
+                    print(f"задача '{int(select_edit)}' : '{edit_name}' успешно отредактирована")
+                else:
+                    print("задачи с таким номером нет в списке")
+            else:
+                print("введеные данные должны быть номером списка задач")
 
         case '4':
             show_collection(collection)
-            select_task = int(input("Введите номер задачи"))
-            delete_task = input("Введите номер задачи для удаления")
-            collection.pop(select_task - 1)
+            delete_edit = input("Введите номер задачи для удаления")
+            if int(delete_edit) > 0  and delete_edit <= len(collection):
+                collection.pop(delete_edit - 1)
+                print(f"задача '{delete_edit}' успешно удалена")
+            else:
+                print("задачи с таким номером нет в списке")
 
         case '0':
             is_start = False
