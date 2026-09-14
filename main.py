@@ -1,40 +1,46 @@
 """Основной файл приложения Task Manager
-    version 0.0.3
-    -[x] реализовать место хранения задач
-    -[x] сделать функцию - показать задачи
-    -[x] сделать функцию - добавить задачу
-    -[x] сделать функцию - редактировать задачу
-    -[x] сделать функцию - удалить задачу
-    -[x] реализовать выход
+    version 0.0.4
+    -[x]
+    приложение может сохранять задачи,
+    редактировать, выдает список задач
+    и может удалять задачу.
 """
-collection = []  
-is_start = True 
+collection = []
+is_start = True
+
+
+def show_collection(task_collection):
+    print("=" * 30)
+    for i, j in enumerate(task_collection):
+        print(i + 1, j)
+    print("=" * 30)
+
+def show_menu():
+    print('1 - показать задачи | 2 - добавить задачу | 3 - редактировать | 4 - удалить | 0 - выход')
 
 while is_start:
-    print('1 - показать задачи | 2 - добавить задачу | 3 - редактировать | 4 - удалить | 0 - выход')
+    show_menu()
     choice_user = input('Введите ваш выбор: ')
 
     match str(choice_user):
         case '1':
-            print(collection)
+            show_collection(collection)
 
         case '2':
-            task = input('Введите название задачи: ')
-            collection.append(task)
-            print(collection)
+            add_task = input("Введите имя задачи для добавления")
+            collection.append(add_task)
 
         case '3':
-            print(collection)
-            num = int(input('Введите номер задачи (с 0): '))
-            new_name = input('Новое название: ')
-            collection[num] = new_name
-            print(collection)
+            show_collection(collection)
+            select_task = int(input("Введите номер задачи"))
+            edit_task = input("Введите новое имя задачи для редактирования")
+            collection[select_task - 1] = edit_task
 
         case '4':
-            print(collection)
-            num = int(input('Введите номер задачи (с 0): '))
-            del collection[num]
-            print(collection)
+            show_collection(collection)
+            select_task = int(input("Введите номер задачи"))
+            delete_task = input("Введите номер задачи для удаления")
+            collection.pop(select_task - 1)
 
         case '0':
             is_start = False
@@ -42,3 +48,5 @@ while is_start:
 
         case _:
             print('Такого пункта нет')
+
+
