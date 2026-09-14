@@ -1,23 +1,44 @@
 """Основной файл приложения Task Manager
-    version 0.0.2
+    version 0.0.3
     -[x] реализовать место хранения задач
-    -[x] сделать функцию - показать заметки
-    -[x] сделать функцию - добавить заметки
+    -[x] сделать функцию - показать задачи
+    -[x] сделать функцию - добавить задачу
+    -[x] сделать функцию - редактировать задачу
+    -[x] сделать функцию - удалить задачу
+    -[x] реализовать выход
 """
-from random import choice
+collection = []  
+is_start = True 
 
-collection = [] #list
-is_start = True #flat
+while is_start:
+    print('1 - показать задачи | 2 - добавить задачу | 3 - редактировать | 4 - удалить | 0 - выход')
+    choice_user = input('Введите ваш выбор: ')
 
-while(is_start):
-    print('1 - показать задачи | 2 - добавить заметку')
-    choice_user = input('Введите ваш выбор( 1 или 2)')
     match str(choice_user):
         case '1':
             print(collection)
+
         case '2':
-            collection.append('task')
+            task = input('Введите название задачи: ')
+            collection.append(task)
             print(collection)
+
+        case '3':
+            print(collection)
+            num = int(input('Введите номер задачи (с 0): '))
+            new_name = input('Новое название: ')
+            collection[num] = new_name
+            print(collection)
+
+        case '4':
+            print(collection)
+            num = int(input('Введите номер задачи (с 0): '))
+            del collection[num]
+            print(collection)
+
+        case '0':
+            is_start = False
+            print('Выход')
+
         case _:
             print('Такого пункта нет')
-
