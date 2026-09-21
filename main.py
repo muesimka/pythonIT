@@ -16,7 +16,7 @@ is_running = True
 
 def show_collection(task_collection):
     print("=" * 45)
-    for i, j in enumerate(collection):
+    for i, j in enumerate(task_collection):
         print(i + 1, j)
     print("=" * 45)
 
@@ -30,7 +30,7 @@ def show_menu():
 
 
 def check_confirm(select_task, task_list):
-    if int(select_task.isdigit()):
+    if select_task.isdigit():
         if int(select_task) > 0 and int(select_task) <= len(task_list):
             return True
         else:
@@ -40,9 +40,10 @@ def check_confirm(select_task, task_list):
         print(f"Введите именно номер задачи!")
         return False
 
+
 def delete_tasks(task_collection):
     delete_task = input("Введите номер задачи: ")
-    if check_confirm(delete_task, task_collection) == 1:
+    if check_confirm(delete_task, task_collection):
         task_collection.pop(int(delete_task) - 1)
         print(f"Задача {delete_task} удалена!")
     else:
@@ -51,7 +52,7 @@ def delete_tasks(task_collection):
 
 def edit_task(task_collection):
     edit_task = input("Введите номер задачи: ")
-    if check_confirm(edit_task, task_collection) == 1:
+    if check_confirm(edit_task, task_collection):
         task_collection[int(edit_task) - 1] = input("Новое имя задачи: ")
     else:
         print("Неверный номер задачи!")
@@ -63,35 +64,58 @@ def add_task(task_collection):
         if len(task_name) < 2:
             print("Название не может быть пустым")
         else:
-            collection.append(f"Задача {len(collection) + 1}")
+            task_collection.append(f"Задача {len(task_collection) + 1}")
     else:
-        collection.append(task_name)
+        task_collection.append(task_name)
         print(f"Задача {task_name} успешно добавлена!")
 
 
-while is_running:
-    show_menu()
-    choice_user = input('Введите ваш выбор: ')
+def main():
+    global is_running
+ 
+    name_file = 'saves.txt'
+    if os.path.exists(name_file):
+        with open(name_file, 'r', encoding='utf-8') as file:
+            task_collection = [line.strip() for line in file if line.strip()]
+    else:
+        task_collection = []
+
+    while is_running:
+        show_menu()
+        choice_user = input('Введите ваш выбор: ')
+
+        match str(choice_user):
+            case "1":
+                show_collection(task_collection)
+                input("нажмите ENTER для продолжения")
+
+            case "2":
+                add_task(task_collection)
+                with open(name_file, 'w', encoding='utf-8') as file:
+                    for task in task_collection:
+                        file.write(task + "\n")
+
+            case "3":
+                show_collection(task_collection)
+                edit_task(task_collection)
+                with open(name_file, 'w', encoding='utf-8') as file:
+                    for task in task_collection:
+                        file.write(task + "\n")
+
+            case "4":
+                show_collection(task_collection)
+                delete_tasks(task_collection)
+                with open(name_file, 'w', encoding='utf-8') as file:
+                    for task in task_collection:
+                        file.write(task + "\n")
+
+            case "5":
+                is_running = False
+                print("До свидиния!")
+
+            case _:
+                print('Такого пункта нет...')
 
 
-    match choice_user:
-        case "1":
-            show_collection(collection)
-
-        case "2":
-            add_task(collection)
-
-        case "3":
-            show_collection(collection)
-            edit_task(collection)
-
-        case "4":
-            show_collection(collection)
-            delete_tasks(collection)
-
-        case "5":
-            is_running = False
-            print("До свидиния!")
-
-        case _:
-            print('Такого пункта нет...')
+if __name__ == '__main__':
+    main()
