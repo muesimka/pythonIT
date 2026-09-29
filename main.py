@@ -1,11 +1,3 @@
-"""Основной файл приложения
-
-    версия 0.0.6
-
-    === Описание ===
-        Приложение может сохранять задачи, выдает список задач, и может удалять и редактировать задачи
-
-"""
 from random import choice
 import processes
 import os
@@ -64,15 +56,17 @@ def add_task(task_collection):
         if len(task_name) < 2:
             print("Название не может быть пустым")
         else:
-            task_collection.append(f"Задача {len(task_collection) + 1}")
+            task_collection.append(f"Задача {len(task_collection) + 1}" )
     else:
         task_collection.append(task_name)
         print(f"Задача {task_name} успешно добавлена!")
 
 
+
+
 def main():
     global is_running
- 
+
     name_file = 'saves.txt'
     if os.path.exists(name_file):
         with open(name_file, 'r', encoding='utf-8') as file:
