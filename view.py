@@ -1,10 +1,8 @@
-"""
-                              === Функции для просмотра и показа задач ===
 
-                                    === Версия приложения: 0.1.0 ===
-"""
+from storage import load_file, save_file
+from config import  NAME_FILE_SAVES
+collection = load_file(task_list: [], NAME_FILE_SAVES)
 
-### Показ списка задач
 def show_collection(task_collection):
     print("=" * 45)
     if not task_collection:
@@ -28,3 +26,5 @@ def show_menu():
     print("3 - Редактировать задачу")
     print("4 - Удаление задачи")
     print("5 - Выход")
+
+```
