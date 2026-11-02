@@ -5,7 +5,7 @@
 """
 import sys
 import os
-from tkinter.messagebox import RETRY
+
 
 ### Проверка подтверждения
 def check_confirm(select_task, task_list):
