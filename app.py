@@ -1,8 +1,8 @@
-def calc(a,b):
-    return a+b
+def calc(a, b):
+    return a + b
 
-def divide(a,b):
-    if b or a == 0:
-        return ValueError
-    else:
-        return a/b
+
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Деление на ноль невозможно")
+    return a / b
