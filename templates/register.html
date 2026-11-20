@@ -3,10 +3,11 @@
     <title>REGISTRATION</title>
     </head>
     <body>
-    <form method="post" action="register.html">
+    <form method="post" action="/register">
         <input type="text" name="reg_email" placeholder="укажите почту как логин" required>
-        <input type="text" name="reg_pass" placeholder="создайте пароль" required>
+        <input type="password" name="reg_pass" placeholder="создайте пароль" required>
         <button type="submit">подтвердить</button>
     </form>
+    {% if error %}<p>{{ error }}</p>{% endif %}
     </body>
 </html>
