@@ -1,17 +1,17 @@
 import unittest
-from unittest import TestCase
+
 from app import calc, divide
 
 
-class TestStringMethods(TestCase):
+class TestStringMethods(unittest.TestCase):
     def test_calc(self):
-        self.assertEqual(calc(1,2), 3)
+        self.assertEqual(calc(1, 2), 3)
 
     def test_divide(self):
-        self.assertEqual(divide(1,0), 2)
+        self.assertEqual(divide(4, 2), 2)
         with self.assertRaises(ValueError):
-            print(ValueError)
+            divide(1, 0)
+
 
 if __name__ == '__main__':
-    tests = TestStringMethods()
-    tests.test_calc()
+    unittest.main()
